@@ -12,25 +12,6 @@
     "graph": {
       "blocks": [
         {
-          "id": "71b30ad7-4f15-441f-afa7-eaf76ccef8e6",
-          "type": "basic.output",
-          "data": {
-            "name": "Z",
-            "pins": [
-              {
-                "index": "0",
-                "name": "",
-                "value": ""
-              }
-            ],
-            "virtual": true
-          },
-          "position": {
-            "x": 960,
-            "y": -96
-          }
-        },
-        {
           "id": "7dab58e4-9061-4ba5-ae22-9bb774459285",
           "type": "basic.input",
           "data": {
@@ -377,8 +358,8 @@
             "virtual": true
           },
           "position": {
-            "x": 736,
-            "y": 160
+            "x": 720,
+            "y": 40
           }
         },
         {
@@ -558,6 +539,25 @@
           }
         },
         {
+          "id": "71b30ad7-4f15-441f-afa7-eaf76ccef8e6",
+          "type": "basic.output",
+          "data": {
+            "name": "Z",
+            "pins": [
+              {
+                "index": "0",
+                "name": "",
+                "value": ""
+              }
+            ],
+            "virtual": true
+          },
+          "position": {
+            "x": 720,
+            "y": 280
+          }
+        },
+        {
           "id": "f1a6e4fb-daf8-4a5d-869c-f9541ff42a26",
           "type": "basic.input",
           "data": {
@@ -597,7 +597,7 @@
           "id": "3e26cf02-2c43-4b67-a3c3-db2dac7a2bcf",
           "type": "basic.code",
           "data": {
-            "code": "//-- Address bus\nwire signed [31:0] A;\nwire signed [31:0] B;\nwire [3:0]  Op;\n\n//-- Data bus\nreg [31:0]  Result = 0;\n\nalways @(*)\n    case (Op)\n        0   :   Result = A & B;\n        1   :   Result = A | B;\n        2   :   Result = A + B;\n        6   :   Result = A - B;\n        7   :   if(A < B) begin\n                    Result = 1;\n                end else begin\n                    Result = 0;\n                end\n        12  :   Result = ~(A | B);\n        default : Result = 0;\n    endcase",
+            "code": "//-- Address bus\nwire signed [31:0] A;\nwire signed [31:0] B;\nwire [3:0]  Op;\n\n//-- Data bus\nreg [31:0]  Result = 0;\nreg Z;\n\nalways @(*) begin\n    case (Op)\n        0   :   Result = A & B;\n        1   :   Result = A | B;\n        2   :   Result = A + B;\n        6   :   Result = A - B;\n        7   :   if(A < B) begin\n                    Result = 1;\n                end else begin\n                    Result = 0;\n                end\n        12  :   Result = ~(A | B);\n        default : Result = 0;\n    endcase\n    if(Result == 0) begin\n        Z = 1;\n    end else begin\n        Z = 0;\n    end\nend",
             "params": [],
             "ports": {
               "in": [
@@ -622,6 +622,9 @@
                   "name": "Result",
                   "range": "[31:0]",
                   "size": 32
+                },
+                {
+                  "name": "Z"
                 }
               ]
             }
@@ -633,36 +636,6 @@
           "size": {
             "width": 400,
             "height": 480
-          }
-        },
-        {
-          "id": "e7c9bea6-e5eb-488e-b968-72778c46cee6",
-          "type": "basic.code",
-          "data": {
-            "code": "//-- Address bus\nwire [31:0] Result;\n\n//-- Data output\nreg Z;\n\nalways @(*) begin\n    if (Result == 0) begin\n        Z <= 1;\n    end else begin\n        Z <= 0;\n    end\nend",
-            "params": [],
-            "ports": {
-              "in": [
-                {
-                  "name": "Result",
-                  "range": "[31:0]",
-                  "size": 32
-                }
-              ],
-              "out": [
-                {
-                  "name": "Z"
-                }
-              ]
-            }
-          },
-          "position": {
-            "x": 584,
-            "y": -184
-          },
-          "size": {
-            "width": 320,
-            "height": 240
           }
         }
       ],
@@ -714,17 +687,6 @@
         {
           "source": {
             "block": "3e26cf02-2c43-4b67-a3c3-db2dac7a2bcf",
-            "port": "Result"
-          },
-          "target": {
-            "block": "e7c9bea6-e5eb-488e-b968-72778c46cee6",
-            "port": "Result"
-          },
-          "size": 32
-        },
-        {
-          "source": {
-            "block": "e7c9bea6-e5eb-488e-b968-72778c46cee6",
             "port": "Z"
           },
           "target": {

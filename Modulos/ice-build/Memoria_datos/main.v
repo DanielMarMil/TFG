@@ -3,9 +3,7 @@
 `default_nettype none
 
 //---- Top entity
-module main #(
- parameter v854d95 = "prueba.list"
-) (
+module main (
  input [31:0] v9c7c2c,
  input [31:0] v57717b,
  input ve357ae,
@@ -15,7 +13,6 @@ module main #(
  output [31:0] vfb2d57,
  output [0:7] vinit
 );
- localparam p7 = v854d95;
  wire [0:31] w0;
  wire [0:31] w1;
  wire [0:31] w2;
@@ -30,9 +27,7 @@ module main #(
  assign w4 = v19af5b;
  assign w5 = va196b8;
  assign w6 = ve480dc;
- main_v4ff6ac #(
-  .Memoria_Datos(p7)
- ) v4ff6ac (
+ main_v4ff6ac v4ff6ac (
   .Read_Data(w0),
   .Address(w1),
   .Wirte_Data(w2),
@@ -50,9 +45,7 @@ endmodule
 /*-- 
 /*-------------------------------------------------*/
 
-module main_v4ff6ac #(
- parameter Memoria_Datos = 0
-) (
+module main_v4ff6ac (
  input [31:0] Address,
  input [31:0] Wirte_Data,
  input Write,
@@ -64,8 +57,7 @@ module main_v4ff6ac #(
  // Memory 
  reg [31:0] Mem [0:255];
  
- // Address Memory
- wire [31:0] Address;
+ parameter ROMFILE = "prueba.list";
  
  // Output Data
  reg [31:0] Read_Data;
@@ -73,22 +65,13 @@ module main_v4ff6ac #(
  // Input Write Data
  wire [31:0] Write_Data;
  
- always @(posedge clk)
+ integer i;
+ 
+ always @(posedge clk or posedge reset)
  begin
      if (reset == 0) begin
          if(Write == 1 && Read == 0) begin
              Mem[Address[31:2]] <= Write_Data;
-         end
-     end
- end    
- 
- integer i;
- 
- always @(*)
- begin
-     if (reset == 0) begin
-         if(Write == 0 && Read == 1) begin
-             Read_Data <= Mem[Address[31:2]];
          end
      end else begin
          for (i = 0; i < 256; i = i + 1) begin
@@ -97,9 +80,23 @@ module main_v4ff6ac #(
      end
  end
  
+ always @(*)
+ begin
+     if (reset == 0) begin
+         if(Write == 0 && Read == 1) begin
+             Read_Data <= Mem[Address[31:2]];
+         end else begin
+             Read_Data <= 0;
+         end
+     end else begin
+         Read_Data <= 0;
+     end
+ end
+ 
  // Memory contents read
- // from the Memoria_Datos table
+ // from the ROMFILE table
  initial begin
-     if (Memoria_Datos) $readmemh(Memoria_Datos, Mem);
+     if (ROMFILE) $readmemh(ROMFILE, Mem);
+     i <= 0;
  end
 endmodule

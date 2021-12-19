@@ -247,17 +247,12 @@
           }
         },
         {
-          "id": "177795db-e03d-4971-8eac-7ed0f312f2e9",
+          "id": "ee60ba78-0227-4235-8d74-04e5a298467c",
           "type": "basic.input",
           "data": {
             "name": "Write_Reg",
-            "range": "[5:0]",
+            "range": "[4:0]",
             "pins": [
-              {
-                "index": "5",
-                "name": "",
-                "value": ""
-              },
               {
                 "index": "4",
                 "name": "",
@@ -644,17 +639,12 @@
           }
         },
         {
-          "id": "010ea629-4ba9-4ba9-b96f-336f38ed24e0",
+          "id": "3ab6957a-21b6-472d-9721-c65c9c0f5d44",
           "type": "basic.input",
           "data": {
             "name": "Read_Reg_1",
-            "range": "[5:0]",
+            "range": "[4:0]",
             "pins": [
-              {
-                "index": "5",
-                "name": "",
-                "value": ""
-              },
               {
                 "index": "4",
                 "name": "",
@@ -690,17 +680,12 @@
           }
         },
         {
-          "id": "c57741ca-8740-409c-a0e7-d728448113e6",
+          "id": "6c3d95c8-438a-458f-86f7-71b743b3bde7",
           "type": "basic.input",
           "data": {
             "name": "Read_Reg_2",
-            "range": "[5:0]",
+            "range": "[4:0]",
             "pins": [
-              {
-                "index": "5",
-                "name": "",
-                "value": ""
-              },
               {
                 "index": "4",
                 "name": "",
@@ -736,33 +721,11 @@
           }
         },
         {
-          "id": "b67355e4-157d-4e55-88e1-075c66187cf9",
-          "type": "basic.memory",
-          "data": {
-            "name": "Memoria",
-            "list": "",
-            "local": false,
-            "format": 16
-          },
-          "position": {
-            "x": 344,
-            "y": -64
-          },
-          "size": {
-            "width": 272,
-            "height": 200
-          }
-        },
-        {
           "id": "2e0b749f-8913-48d9-a164-868ad1e5016b",
           "type": "basic.code",
           "data": {
-            "code": "// Memory \nreg [31:0] Mem [0:31];\n\n// Address Memory\nwire [5:0] Read_Reg_1;\nwire [5:0] Read_Reg_2;\nwire [5:0] Write_Reg;\n\n// Input control\nwire reset;\nwire clk;\nwire write;\n\n// Output Read Reg Data\nreg [31:0] Read_Data_1;\nreg [31:0] Read_Data_2;\n\n// Input Write Data\nwire [31:0] Write_Data;\n\nalways @(posedge clk or posedge reset)\nbegin\n    if(reset != 0) begin\n        for (i = 1; i < 32; i = i + 1) begin\n            Mem[i] <= 32'b0;\n        end\n    end else if (write == 1 && Write_Reg != 0) begin\n        Mem[Write_Reg] <= Write_Data;\n    end\nend\n\ninteger i;\n\nalways @(*) \nbegin\n    if (reset != 0) begin\n        Read_Data_1 <= 0;\n        Read_Data_2 <= 0;\n    end else begin\n        if(Read_Reg_1 != 0)\n            Read_Data_1 <= Mem[Read_Reg_1];\n        else\n            Read_Data_1 <= 0;\n            \n        if(Read_Reg_2 != 0)\n            Read_Data_2 <= Mem[Read_Reg_2];\n        else\n            Read_Data_2 <= 0;\n    end\nend\n\n// Memory contents read\n// from the Memoria_Registros table\ninitial begin\n    if (Memoria_Registro) $readmemh(Memoria_Registro, Mem);\nend",
-            "params": [
-              {
-                "name": "Memoria_Registro"
-              }
-            ],
+            "code": "// Memory \nreg [31:0] Mem [0:31];\n\n// Address Memory\nwire [4:0] Read_Reg_1;\nwire [4:0] Read_Reg_2;\nwire [4:0] Write_Reg;\n\n// Input control\nwire reset;\nwire clk;\nwire write;\n\n// Output Read Reg Data\nreg [31:0] Read_Data_1;\nreg [31:0] Read_Data_2;\n\n// Input Write Data\nwire [31:0] Write_Data;\n\nalways @(posedge clk or posedge reset)\nbegin\n    if(reset != 0) begin\n        for (i = 1; i < 32; i = i + 1) begin\n            Mem[i] <= 32'b0;\n        end\n    end else if (write == 1 && Write_Reg != 0) begin\n        Mem[Write_Reg] <= Write_Data;\n    end\nend\n\ninteger i;\n\nalways @(*) \nbegin\n    if (reset != 0) begin\n        Read_Data_1 <= 0;\n        Read_Data_2 <= 0;\n    end else begin\n        if(Read_Reg_1 != 0)\n            Read_Data_1 <= Mem[Read_Reg_1];\n        else\n            Read_Data_1 <= 0;\n            \n        if(Read_Reg_2 != 0)\n            Read_Data_2 <= Mem[Read_Reg_2];\n        else\n            Read_Data_2 <= 0;\n    end\nend\n\ninitial begin\n    for (i = 1; i < 32; i = i + 1) begin\n            Mem[i] <= 32'b0;\n    end\nend",
+            "params": [],
             "ports": {
               "in": [
                 {
@@ -776,8 +739,8 @@
                 },
                 {
                   "name": "Write_Reg",
-                  "range": "[5:0]",
-                  "size": 6
+                  "range": "[4:0]",
+                  "size": 5
                 },
                 {
                   "name": "Write_Data",
@@ -786,13 +749,13 @@
                 },
                 {
                   "name": "Read_Reg_1",
-                  "range": "[5:0]",
-                  "size": 6
+                  "range": "[4:0]",
+                  "size": 5
                 },
                 {
                   "name": "Read_Reg_2",
-                  "range": "[5:0]",
-                  "size": 6
+                  "range": "[4:0]",
+                  "size": 5
                 }
               ],
               "out": [
@@ -820,41 +783,6 @@
         }
       ],
       "wires": [
-        {
-          "source": {
-            "block": "b67355e4-157d-4e55-88e1-075c66187cf9",
-            "port": "memory-out"
-          },
-          "target": {
-            "block": "2e0b749f-8913-48d9-a164-868ad1e5016b",
-            "port": "Memoria_Registro"
-          },
-          "vertices": []
-        },
-        {
-          "source": {
-            "block": "010ea629-4ba9-4ba9-b96f-336f38ed24e0",
-            "port": "out"
-          },
-          "target": {
-            "block": "2e0b749f-8913-48d9-a164-868ad1e5016b",
-            "port": "Read_Reg_1"
-          },
-          "vertices": [],
-          "size": 6
-        },
-        {
-          "source": {
-            "block": "c57741ca-8740-409c-a0e7-d728448113e6",
-            "port": "out"
-          },
-          "target": {
-            "block": "2e0b749f-8913-48d9-a164-868ad1e5016b",
-            "port": "Read_Reg_2"
-          },
-          "vertices": [],
-          "size": 6
-        },
         {
           "source": {
             "block": "221cdf01-996e-4d74-8399-4d764cff4919",
@@ -912,17 +840,6 @@
         },
         {
           "source": {
-            "block": "177795db-e03d-4971-8eac-7ed0f312f2e9",
-            "port": "out"
-          },
-          "target": {
-            "block": "2e0b749f-8913-48d9-a164-868ad1e5016b",
-            "port": "Write_Reg"
-          },
-          "size": 6
-        },
-        {
-          "source": {
             "block": "cfb2436c-d580-4a51-bcfb-f2d7035fd700",
             "port": "out"
           },
@@ -931,6 +848,39 @@
             "port": "Write_Data"
           },
           "size": 32
+        },
+        {
+          "source": {
+            "block": "ee60ba78-0227-4235-8d74-04e5a298467c",
+            "port": "out"
+          },
+          "target": {
+            "block": "2e0b749f-8913-48d9-a164-868ad1e5016b",
+            "port": "Write_Reg"
+          },
+          "size": 5
+        },
+        {
+          "source": {
+            "block": "3ab6957a-21b6-472d-9721-c65c9c0f5d44",
+            "port": "out"
+          },
+          "target": {
+            "block": "2e0b749f-8913-48d9-a164-868ad1e5016b",
+            "port": "Read_Reg_1"
+          },
+          "size": 5
+        },
+        {
+          "source": {
+            "block": "6c3d95c8-438a-458f-86f7-71b743b3bde7",
+            "port": "out"
+          },
+          "target": {
+            "block": "2e0b749f-8913-48d9-a164-868ad1e5016b",
+            "port": "Read_Reg_2"
+          },
+          "size": 5
         }
       ]
     }

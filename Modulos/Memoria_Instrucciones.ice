@@ -363,33 +363,11 @@
           }
         },
         {
-          "id": "84f35528-5324-42e8-a9ac-65dcab08328e",
-          "type": "basic.memory",
-          "data": {
-            "name": "Instruction",
-            "list": "",
-            "local": false,
-            "format": 16
-          },
-          "position": {
-            "x": 384,
-            "y": -128
-          },
-          "size": {
-            "width": 224,
-            "height": 256
-          }
-        },
-        {
           "id": "f4c334b5-ce5c-4afa-8dbf-56ee8c4167c6",
           "type": "basic.code",
           "data": {
-            "code": "// Address bus (32 bits)\nwire [31:0] A;\n// Instruction Bus (32 bits)\nreg [31:0] I;\n// Memory Instruction\nreg [31:0] ins [0:63];\n\nalways @(*) begin\n   I <= ins[A[31:2]];\nend\n\n// Memory contents read\n// from the Table_Instruction table\ninitial begin\n    if (Table_Instruction) $readmemh(Table_Instruction, ins);\nend",
-            "params": [
-              {
-                "name": "Table_Instruction"
-              }
-            ],
+            "code": "// Instruction Bus (32 bits)\nreg [31:0] I;\n// Memory Instruction\nreg [31:0] ins [0:63];\n\nparameter INSTROMFILE = \"instruction.list\";\n\nalways @(*) begin\n   I <= ins[A[31:2]];\nend\n\n// Memory contents read\n// from the INSTROMFILE table\ninitial begin\n    if (INSTROMFILE) $readmemh(INSTROMFILE, ins);\nend",
+            "params": [],
             "ports": {
               "in": [
                 {
@@ -418,16 +396,6 @@
         }
       ],
       "wires": [
-        {
-          "source": {
-            "block": "84f35528-5324-42e8-a9ac-65dcab08328e",
-            "port": "memory-out"
-          },
-          "target": {
-            "block": "f4c334b5-ce5c-4afa-8dbf-56ee8c4167c6",
-            "port": "Table_Instruction"
-          }
-        },
         {
           "source": {
             "block": "5884febf-a05a-4c4f-b090-f9aec93abe79",

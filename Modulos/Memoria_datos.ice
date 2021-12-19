@@ -619,19 +619,6 @@
           }
         },
         {
-          "id": "25c6a96e-0120-4939-9c4e-3d51078d4a37",
-          "type": "basic.constant",
-          "data": {
-            "name": "Memoria_Datos",
-            "value": "\"prueba.list\"",
-            "local": false
-          },
-          "position": {
-            "x": 720,
-            "y": 8
-          }
-        },
-        {
           "id": "59d4e53f-3f2d-46d4-a416-d43f2e76be4d",
           "type": "basic.info",
           "data": {
@@ -651,12 +638,8 @@
           "id": "1c8354d7-7abe-4b12-befa-64eb41996370",
           "type": "basic.code",
           "data": {
-            "code": "// Memory \nreg [31:0] Mem [0:255];\n\n// Address Memory\nwire [31:0] Address;\n\n// Output Data\nreg [31:0] Read_Data;\n\n// Input Write Data\nwire [31:0] Write_Data;\n\nalways @(posedge clk)\nbegin\n    if (reset == 0) begin\n        if(Write == 1 && Read == 0) begin\n            Mem[Address[31:2]] <= Write_Data;\n        end\n    end\nend    \n\ninteger i;\n\nalways @(*)\nbegin\n    if (reset == 0) begin\n        if(Write == 0 && Read == 1) begin\n            Read_Data <= Mem[Address[31:2]];\n        end\n    end else begin\n        for (i = 0; i < 256; i = i + 1) begin\n            Mem[i] <= 0;\n        end\n    end\nend\n\n// Memory contents read\n// from the Memoria_Datos table\ninitial begin\n    if (Memoria_Datos) $readmemh(Memoria_Datos, Mem);\nend",
-            "params": [
-              {
-                "name": "Memoria_Datos"
-              }
-            ],
+            "code": "// Memory \nreg [31:0] Mem [0:255];\n\nparameter ROMFILE = \"prueba.list\";\n\n// Output Data\nreg [31:0] Read_Data;\n\n// Input Write Data\nwire [31:0] Write_Data;\n\ninteger i;\n\nalways @(posedge clk or posedge reset)\nbegin\n    if (reset == 0) begin\n        if(Write == 1 && Read == 0) begin\n            Mem[Address[31:2]] <= Write_Data;\n        end\n    end else begin\n        for (i = 0; i < 256; i = i + 1) begin\n            Mem[i] <= 0;\n        end\n    end\nend\n\nalways @(*)\nbegin\n    if (reset == 0) begin\n        if(Write == 0 && Read == 1) begin\n            Read_Data <= Mem[Address[31:2]];\n        end else begin\n            Read_Data <= 0;\n        end\n    end else begin\n        Read_Data <= 0;\n    end\nend\n\n// Memory contents read\n// from the ROMFILE table\ninitial begin\n    if (ROMFILE) $readmemh(ROMFILE, Mem);\n    i <= 0;\nend",
+            "params": [],
             "ports": {
               "in": [
                 {
@@ -773,16 +756,6 @@
           "target": {
             "block": "1c8354d7-7abe-4b12-befa-64eb41996370",
             "port": "reset"
-          }
-        },
-        {
-          "source": {
-            "block": "25c6a96e-0120-4939-9c4e-3d51078d4a37",
-            "port": "constant-out"
-          },
-          "target": {
-            "block": "1c8354d7-7abe-4b12-befa-64eb41996370",
-            "port": "Memoria_Datos"
           }
         }
       ]

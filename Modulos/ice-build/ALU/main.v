@@ -4,34 +4,10 @@
 
 //---- Top entity
 module main (
- input [31:0] vfa7d11,
- input [31:0] v1e7c65,
- input [3:0] ve768a8,
- output v3da6a5,
- output [31:0] v6144d8,
  output [0:7] vinit
 );
- wire [0:31] w0;
- wire [0:31] w1;
- wire [0:3] w2;
- wire [0:31] w3;
- wire [0:31] w4;
- wire w5;
- assign w0 = vfa7d11;
- assign w1 = v1e7c65;
- assign w2 = ve768a8;
- assign v6144d8 = w3;
- assign v3da6a5 = w5;
- assign w4 = w3;
  main_v00bd94 v00bd94 (
-  .A(w0),
-  .B(w1),
-  .Op(w2),
-  .Result(w3)
- );
- main_ve56818 ve56818 (
-  .Result(w4),
-  .Z(w5)
+ 
  );
  assign vinit = 8'b00000000;
 endmodule
@@ -46,7 +22,8 @@ module main_v00bd94 (
  input [31:0] A,
  input [31:0] B,
  input [3:0] Op,
- output [31:0] Result
+ output [31:0] Result,
+ output Z
 );
  //-- Address bus
  wire signed [31:0] A;
@@ -55,8 +32,9 @@ module main_v00bd94 (
  
  //-- Data bus
  reg [31:0]  Result = 0;
+ reg Z;
  
- always @(*)
+ always @(*) begin
      case (Op)
          0   :   Result = A & B;
          1   :   Result = A | B;
@@ -70,23 +48,10 @@ module main_v00bd94 (
          12  :   Result = ~(A | B);
          default : Result = 0;
      endcase
-endmodule
-
-module main_ve56818 (
- input [31:0] Result,
- output Z
-);
- //-- Address bus
- wire [31:0] Result;
- 
- //-- Data output
- reg Z;
- 
- always @(*) begin
-     if (Result == 0) begin
-         Z <= 1;
+     if(Result == 0) begin
+         Z = 1;
      end else begin
-         Z <= 0;
+         Z = 0;
      end
  end
 endmodule

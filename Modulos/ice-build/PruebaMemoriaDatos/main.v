@@ -4,12 +4,12 @@
 
 //---- Top entity
 module main #(
- parameter v75d8b9 = 11
+ parameter v75d8b9 = 7
 ) (
  input v0e45ee,
  input vclk,
- output v80fc3a,
  output v44f935,
+ output v80fc3a,
  output vd326d3,
  output [0:5] vinit
 );
@@ -23,36 +23,47 @@ module main #(
  wire [0:7] w7;
  wire w8;
  wire [0:31] w9;
- wire w10;
+ wire [0:31] w10;
  wire w11;
  wire w12;
  wire w13;
+ wire [0:31] w14;
+ wire w15;
+ wire w16;
+ wire w17;
+ wire [0:7] w18;
+ wire [0:31] w19;
+ wire [0:31] w20;
  assign v80fc3a = w0;
  assign w1 = v0e45ee;
  assign v44f935 = w1;
  assign w2 = v0e45ee;
  assign vd326d3 = w8;
- assign w11 = vclk;
- assign w12 = vclk;
- assign w13 = vclk;
+ assign w15 = v0e45ee;
+ assign w16 = vclk;
+ assign w17 = vclk;
  assign w2 = w1;
  assign w6 = w4;
- assign w10 = w4;
- assign w10 = w6;
- assign w12 = w11;
- assign w13 = w11;
- assign w13 = w12;
+ assign w15 = w1;
+ assign w15 = w2;
+ assign w17 = w16;
+ assign w18 = w7;
+ assign w19 = w9;
+ assign w20 = w10;
  vb0c93d v7ac299 (
   .vbc3322(w0),
   .v9580da(w6),
   .v516a7d(w8),
-  .v9856bd(w9),
-  .v805d19(w11)
+  .v9856bd(w14),
+  .v805d19(w16),
+  .v68ad21(w18),
+  .v489ac8(w19),
+  .vd8ecb5(w20)
  );
  ve2b856 vf81022 (
   .vd9601b(w2),
   .v64879c(w4),
-  .vbbbce8(w12)
+  .vbbbce8(w17)
  );
  v725b7e vdeaab7 (
   .v9fb85f(w5)
@@ -65,15 +76,21 @@ module main #(
   .vb86fe4(w7)
  );
  main_vaa8dd5 vaa8dd5 (
-  .in(w7)
+  .in(w7),
+  .address(w9),
+  .write_data(w10),
+  .write(w11),
+  .read(w12),
+  .reset(w13)
  );
- vc4dd08 vdcebf1 (
- 
- );
- v0fae71 v186ab1 (
-  .vfb2d57(w9),
-  .v19af5b(w10),
-  .va196b8(w13)
+ v130b18 v077471 (
+  .v9c7c2c(w9),
+  .v57717b(w10),
+  .ve357ae(w11),
+  .v19af5b(w12),
+  .ve480dc(w13),
+  .vfb2d57(w14),
+  .va196b8(w15)
  );
  assign vinit = 6'b000000;
 endmodule
@@ -831,31 +848,7 @@ module vd014cb_vbd6086 #(
      
 endmodule
 //---- Top entity
-module vc4dd08 (
- output v608bd9
-);
- wire w0;
- assign v608bd9 = w0;
- vc4dd08_v68c173 v68c173 (
-  .v(w0)
- );
-endmodule
-
-/*-------------------------------------------------*/
-/*-- Bit 0  */
-/*-- - - - - - - - - - - - - - - - - - - - - - - --*/
-/*-- Assign 0 to the output wire
-/*-------------------------------------------------*/
-
-module vc4dd08_v68c173 (
- output v
-);
- // Bit 0
- 
- assign v = 1'b0;
-endmodule
-//---- Top entity
-module v0fae71 #(
+module v130b18 #(
  parameter v854d95 = "prueba.list"
 ) (
  input [31:0] v9c7c2c,
@@ -881,7 +874,7 @@ module v0fae71 #(
  assign w4 = v19af5b;
  assign w5 = va196b8;
  assign w6 = ve480dc;
- v0fae71_v4ff6ac #(
+ v130b18_v4ff6ac #(
   .Memoria_Datos(p7)
  ) v4ff6ac (
   .Read_Data(w0),
@@ -900,7 +893,7 @@ endmodule
 /*-- 
 /*-------------------------------------------------*/
 
-module v0fae71_v4ff6ac #(
+module v130b18_v4ff6ac #(
  parameter Memoria_Datos = 0
 ) (
  input [31:0] Address,
@@ -923,27 +916,37 @@ module v0fae71_v4ff6ac #(
  // Input Write Data
  wire [31:0] Write_Data;
  
- always @(posedge clk)
+ // Control Inupt
+ wire reset;
+ wire Write;
+ wire Read;
+ wire clk;
+ 
+ integer i;
+ 
+ always @(posedge clk or posedge reset)
  begin
      if (reset == 0) begin
          if(Write == 1 && Read == 0) begin
              Mem[Address[31:2]] <= Write_Data;
          end
+     end else begin
+         for (i = 0; i < 256; i = i + 1) begin
+             Mem[i] <= 0;
+         end
      end
- end    
- 
- integer i;
+ end
  
  always @(*)
  begin
      if (reset == 0) begin
          if(Write == 0 && Read == 1) begin
              Read_Data <= Mem[Address[31:2]];
+         end else begin
+             Read_Data <= 0;
          end
      end else begin
-         for (i = 0; i < 256; i = i + 1) begin
-             Mem[i] <= 0;
-         end
+         Read_Data <= 0;
      end
  end
  
@@ -956,7 +959,78 @@ endmodule
 
 module main_vaa8dd5 (
  input [7:0] in,
- output [31:0] out
+ output [31:0] address,
+ output [31:0] write_data,
+ output write,
+ output read,
+ output reset
 );
- assign out = 0 + in;
+ wire [7:0]in;
+ reg [31:0] address;
+ reg [31:0] write_data;
+ reg write;
+ reg read;
+ reg reset;
+ 
+ always @(*) begin
+     case(in)
+     1:  begin
+             address <= 0;
+             write_data <= 2;
+             write <= 1;
+             read <= 0;
+             reset <= 0;
+         end
+     2: begin
+             address <= 10;
+             write_data <= 2;
+             write <= 1;
+             read <= 0;
+             reset <= 0;
+         end
+     3: begin
+             address <= 10;
+             write_data <= 13;
+             write <= 0;
+             read <= 1;
+             reset <= 0;
+         end
+     4: begin
+             address <= 0;
+             write_data <= 13;
+             write <= 0;
+             read <= 1;
+             reset <= 0;
+         end
+     5: begin
+             address <= 4;
+             write_data <= 13;
+             write <= 0;
+             read <= 1;
+             reset <= 1;
+         end
+     6: begin
+             address <= 0;
+             write_data <= 13;
+             write <= 0;
+             read <= 1;
+             reset <= 0;
+         end
+     7: begin
+             address <= 0;
+             write_data <= 13;
+             write <= 0;
+             read <= 1;
+             reset <= 0;
+         end
+     default:
+         begin
+             address <= 0;
+             write_data <= 13;
+             write <= 0;
+             read <= 1;
+             reset <= 0;
+         end
+     endcase
+ end
 endmodule
