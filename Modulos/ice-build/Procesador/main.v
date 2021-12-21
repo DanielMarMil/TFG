@@ -4,11 +4,39 @@
 
 //---- Top entity
 module main (
+ input v88986e,
+ output vb3b0a7,
+ output [0:6] vinit
+);
+ wire w0;
+ wire w1;
+ wire w2;
+ wire w3;
+ assign w0 = v88986e;
+ assign w2 = v88986e;
+ assign vb3b0a7 = w3;
+ assign w2 = w0;
+ assign w3 = w1;
+ v3256ad v5e49d5 (
+  .v61bf59(w0),
+  .v2521b4(w1),
+  .v3abc7c(w1),
+  .vb5a909(w2)
+ );
+ assign vinit = 7'b0000000;
+endmodule
+
+/*-------------------------------------------------*/
+/*--   */
+/*-- - - - - - - - - - - - - - - - - - - - - - - --*/
+/*-- 
+/*-------------------------------------------------*/
+//---- Top entity
+module v3256ad (
  input v61bf59,
  input vb5a909,
  input v3abc7c,
- output v2521b4,
- output [0:7] vinit
+ output v2521b4
 );
  wire [0:3] w0;
  wire [0:31] w1;
@@ -261,7 +289,6 @@ module main (
   .v8b2ec8(w22),
   .va80fcd(w23)
  );
- assign vinit = 8'b00000000;
 endmodule
 
 /*-------------------------------------------------*/

@@ -183,8 +183,8 @@
             "clock": false
           },
           "position": {
-            "x": 256,
-            "y": 216
+            "x": 224,
+            "y": 144
           }
         },
         {
@@ -359,28 +359,8 @@
             "clock": false
           },
           "position": {
-            "x": 248,
-            "y": 336
-          }
-        },
-        {
-          "id": "b6679fca-a04e-4c58-a6d0-0586574ecde7",
-          "type": "basic.input",
-          "data": {
-            "name": "Write",
-            "pins": [
-              {
-                "index": "0",
-                "name": "",
-                "value": ""
-              }
-            ],
-            "virtual": true,
-            "clock": false
-          },
-          "position": {
-            "x": 256,
-            "y": 456
+            "x": 216,
+            "y": 264
           }
         },
         {
@@ -555,7 +535,27 @@
           },
           "position": {
             "x": 1224,
-            "y": 512
+            "y": 336
+          }
+        },
+        {
+          "id": "b6679fca-a04e-4c58-a6d0-0586574ecde7",
+          "type": "basic.input",
+          "data": {
+            "name": "Write",
+            "pins": [
+              {
+                "index": "0",
+                "name": "",
+                "value": ""
+              }
+            ],
+            "virtual": true,
+            "clock": false
+          },
+          "position": {
+            "x": 224,
+            "y": 384
           }
         },
         {
@@ -574,8 +574,63 @@
             "clock": false
           },
           "position": {
-            "x": 248,
-            "y": 568
+            "x": 216,
+            "y": 496
+          }
+        },
+        {
+          "id": "02394abd-2ca3-4ab2-b4db-e6cec774dade",
+          "type": "basic.output",
+          "data": {
+            "name": "LED",
+            "range": "[7:0]",
+            "pins": [
+              {
+                "index": "7",
+                "name": "LED7",
+                "value": "104"
+              },
+              {
+                "index": "6",
+                "name": "LED6",
+                "value": "102"
+              },
+              {
+                "index": "5",
+                "name": "LED5",
+                "value": "101"
+              },
+              {
+                "index": "4",
+                "name": "LED4",
+                "value": "99"
+              },
+              {
+                "index": "3",
+                "name": "LED3",
+                "value": "98"
+              },
+              {
+                "index": "2",
+                "name": "LED2",
+                "value": "97"
+              },
+              {
+                "index": "1",
+                "name": "LED1",
+                "value": "96"
+              },
+              {
+                "index": "0",
+                "name": "LED0",
+                "value": "95"
+              }
+            ],
+            "virtual": false
+          },
+          "position": {
+            "x": 1208,
+            "y": 576
           }
         },
         {
@@ -594,8 +649,8 @@
             "clock": true
           },
           "position": {
-            "x": 248,
-            "y": 688
+            "x": 216,
+            "y": 616
           }
         },
         {
@@ -614,8 +669,28 @@
             "clock": false
           },
           "position": {
-            "x": 248,
-            "y": 808
+            "x": 216,
+            "y": 736
+          }
+        },
+        {
+          "id": "c43683cd-fbac-4301-85cb-cd598fa5efa4",
+          "type": "basic.input",
+          "data": {
+            "name": "Pulsador_1",
+            "pins": [
+              {
+                "index": "0",
+                "name": "SW1",
+                "value": "10"
+              }
+            ],
+            "virtual": false,
+            "clock": false
+          },
+          "position": {
+            "x": 224,
+            "y": 832
           }
         },
         {
@@ -638,7 +713,7 @@
           "id": "1c8354d7-7abe-4b12-befa-64eb41996370",
           "type": "basic.code",
           "data": {
-            "code": "// Memory \nreg [31:0] Mem [0:255];\n\nparameter ROMFILE = \"prueba.list\";\n\n// Output Data\nreg [31:0] Read_Data;\n\n// Input Write Data\nwire [31:0] Write_Data;\n\ninteger i;\n\nalways @(posedge clk or posedge reset)\nbegin\n    if (reset == 0) begin\n        if(Write == 1 && Read == 0) begin\n            Mem[Address[31:2]] <= Write_Data;\n        end\n    end else begin\n        for (i = 0; i < 256; i = i + 1) begin\n            Mem[i] <= 0;\n        end\n    end\nend\n\nalways @(*)\nbegin\n    if (reset == 0) begin\n        if(Write == 0 && Read == 1) begin\n            Read_Data <= Mem[Address[31:2]];\n        end else begin\n            Read_Data <= 0;\n        end\n    end else begin\n        Read_Data <= 0;\n    end\nend\n\n// Memory contents read\n// from the ROMFILE table\ninitial begin\n    if (ROMFILE) $readmemh(ROMFILE, Mem);\n    i <= 0;\nend",
+            "code": "// Memory \nreg [31:0] Mem [0:255];\n\nparameter ROMFILE = \"prueba.list\";\n\n// Output Data\nreg [31:0] Read_Data;\n\nreg [7:0] pin;\n\n// Input Write Data\nwire [31:0] Write_Data;\n\ninteger i;\n\nalways @(posedge clk or posedge reset)\nbegin\n    if (reset == 0) begin\n        if(Write == 1 && Read == 0) begin\n            if(~Address[31]) begin\n                Mem[Address[31:2]] <= Write_Data;\n            end else begin\n                pin <= Write_Data[7:0];\n            end\n        end\n    end else begin\n        for (i = 0; i < 256; i = i + 1) begin\n            Mem[i] <= 0;\n        end\n    end\nend\n\nalways @(*)\nbegin\n    if (reset == 0) begin\n        if(Write == 0 && Read == 1) begin\n            if(Address[31]) begin\n                Read_Data <= bottom;\n            end else begin\n                Read_Data <= Mem[Address[31:2]];\n            end\n        end else begin\n            Read_Data <= 0;\n        end\n    end else begin\n        Read_Data <= 0;\n    end\nend\n\nassign Out_PIN = pin;\n\n// Memory contents read\n// from the ROMFILE table\ninitial begin\n    if (ROMFILE) $readmemh(ROMFILE, Mem);\n    i <= 0;\nend",
             "params": [],
             "ports": {
               "in": [
@@ -663,6 +738,9 @@
                 },
                 {
                   "name": "reset"
+                },
+                {
+                  "name": "bottom"
                 }
               ],
               "out": [
@@ -670,6 +748,11 @@
                   "name": "Read_Data",
                   "range": "[31:0]",
                   "size": 32
+                },
+                {
+                  "name": "Out_PIN",
+                  "range": "[7:0]",
+                  "size": 8
                 }
               ]
             }
@@ -756,6 +839,27 @@
           "target": {
             "block": "1c8354d7-7abe-4b12-befa-64eb41996370",
             "port": "reset"
+          }
+        },
+        {
+          "source": {
+            "block": "1c8354d7-7abe-4b12-befa-64eb41996370",
+            "port": "Out_PIN"
+          },
+          "target": {
+            "block": "02394abd-2ca3-4ab2-b4db-e6cec774dade",
+            "port": "in"
+          },
+          "size": 8
+        },
+        {
+          "source": {
+            "block": "c43683cd-fbac-4301-85cb-cd598fa5efa4",
+            "port": "out"
+          },
+          "target": {
+            "block": "1c8354d7-7abe-4b12-befa-64eb41996370",
+            "port": "bottom"
           }
         }
       ]

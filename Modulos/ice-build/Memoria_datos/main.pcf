@@ -100,11 +100,12 @@ set_io vfb2d57[0]
 set_io v19af5b 
 set_io va196b8 
 set_io ve480dc 
-set_io vinit[0] 95
-set_io vinit[1] 96
-set_io vinit[2] 97
-set_io vinit[3] 98
-set_io vinit[4] 99
-set_io vinit[5] 101
-set_io vinit[6] 102
-set_io vinit[7] 104
+set_io v6e68ca[7] 104
+set_io v6e68ca[6] 102
+set_io v6e68ca[5] 101
+set_io v6e68ca[4] 99
+set_io v6e68ca[3] 98
+set_io v6e68ca[2] 97
+set_io v6e68ca[1] 96
+set_io v6e68ca[0] 95
+set_io v9e9a10 10
