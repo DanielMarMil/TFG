@@ -6,28 +6,24 @@
 module main #(
  parameter vac15e2 = 256
 ) (
- input v5d2dcc,
  input va993b5,
- input va0c046,
+ input [31:0] vfe4e9a,
  output [31:0] v5d0c90,
  output [0:7] vinit
 );
  localparam p0 = vac15e2;
  wire w1;
- wire w2;
- wire w3;
- wire [0:31] w4;
- assign w1 = v5d2dcc;
- assign w2 = va993b5;
- assign w3 = va0c046;
- assign v5d0c90 = w4;
+ wire [0:31] w2;
+ wire [0:31] w3;
+ assign w1 = va993b5;
+ assign v5d0c90 = w2;
+ assign w3 = vfe4e9a;
  main_v0a05b1 #(
   .M(p0)
  ) v0a05b1 (
-  .clk(w1),
-  .rst(w2),
-  .cnt(w3),
-  .out(w4)
+  .rst(w1),
+  .out(w2),
+  .pc(w3)
  );
  assign vinit = 8'b00000000;
 endmodule
@@ -41,9 +37,7 @@ endmodule
 module main_v0a05b1 #(
  parameter M = 0
 ) (
- input clk,
  input rst,
- input cnt,
  input [31:0] pc,
  output [31:0] out
 );
@@ -55,7 +49,7 @@ module main_v0a05b1 #(
      ov <= 0;
  end
  
- always @(posedge clk) begin
+ always @(*) begin
      ov = (_o == M);
      if(rst | ov) begin
          _o <= 0;

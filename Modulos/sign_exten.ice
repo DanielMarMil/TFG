@@ -286,7 +286,7 @@
           "id": "26780f02-53d0-4326-9e33-ff51b862335c",
           "type": "basic.code",
           "data": {
-            "code": "assign out = in;",
+            "code": "assign out={in[15],in[15],in[15],in[15],in[15],in[15],in[15],in[15],in[15],in[15],in[15],in[15],in[15],in[15],in[15],in[15],in};",
             "params": [],
             "ports": {
               "in": [

@@ -641,7 +641,7 @@
           "id": "25b1fc6e-3e77-4a48-9ef5-c7cd18252b41",
           "type": "basic.code",
           "data": {
-            "code": "assign inst = instruction[31:26];\n\nassign rs = instruction[25:21];\n\nassign rt = instruction[20:16];\n\nassign rd = instruction[15:11];\n\nassign funtion = instruction[5:0];\n\nassign rd = instruction[15:0];\n\nassign rd = instruction[25:0];",
+            "code": "assign inst = instruction[31:26];\n\nassign rs = instruction[25:21];\n\nassign rt = instruction[20:16];\n\nassign rd = instruction[15:11];\n\nassign funtion = instruction[5:0];\n\nassign dir_1 = instruction[15:0];\n\nassign dir_2 = instruction[25:0];",
             "params": [],
             "ports": {
               "in": [

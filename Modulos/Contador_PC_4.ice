@@ -12,26 +12,6 @@
     "graph": {
       "blocks": [
         {
-          "id": "e738a6e1-5206-4b15-9181-1901077ce5fa",
-          "type": "basic.input",
-          "data": {
-            "name": "clk",
-            "pins": [
-              {
-                "index": "0",
-                "name": "NULL",
-                "value": "NULL"
-              }
-            ],
-            "virtual": true,
-            "clock": false
-          },
-          "position": {
-            "x": 104,
-            "y": 184
-          }
-        },
-        {
           "id": "3d211399-66ed-4227-96b3-cc0f4f4c8564",
           "type": "basic.input",
           "data": {
@@ -48,7 +28,7 @@
           },
           "position": {
             "x": 104,
-            "y": 272
+            "y": 224
           }
         },
         {
@@ -227,26 +207,6 @@
           }
         },
         {
-          "id": "886f328e-c08b-4ffb-ba0a-e29a466a8cb0",
-          "type": "basic.input",
-          "data": {
-            "name": "Cnt",
-            "pins": [
-              {
-                "index": "0",
-                "name": "NULL",
-                "value": "NULL"
-              }
-            ],
-            "virtual": true,
-            "clock": false
-          },
-          "position": {
-            "x": 104,
-            "y": 360
-          }
-        },
-        {
           "id": "de911070-42b8-4ade-9b5e-aa2b478d695f",
           "type": "basic.input",
           "data": {
@@ -418,8 +378,8 @@
             "clock": false
           },
           "position": {
-            "x": 104,
-            "y": 448
+            "x": 96,
+            "y": 400
           }
         },
         {
@@ -431,7 +391,7 @@
             "local": false
           },
           "position": {
-            "x": 424,
+            "x": 432,
             "y": 40
           }
         },
@@ -439,7 +399,7 @@
           "id": "15e4c588-45b9-4fe0-8016-d324b387c7ab",
           "type": "basic.code",
           "data": {
-            "code": "reg [31:0]_o;\nreg ov;\n\ninitial begin\n    _o <= 0;\n    ov <= 0;\nend\n\nalways @(posedge clk) begin\n    ov = (_o == M);\n    if(rst | ov) begin\n        _o <= 0;\n    end else begin\n        _o <= pc + 4;\n    end\nend\n\nassign out = _o;\n",
+            "code": "reg [31:0]_o;\nreg ov;\n\ninitial begin\n    _o <= 0;\n    ov <= 0;\nend\n\nalways @(*) begin\n    ov = (_o == M);\n    if(rst | ov) begin\n        _o <= 0;\n    end else begin\n        _o <= pc + 4;\n    end\nend\n\nassign out = _o;\n",
             "params": [
               {
                 "name": "M"
@@ -448,13 +408,7 @@
             "ports": {
               "in": [
                 {
-                  "name": "clk"
-                },
-                {
                   "name": "rst"
-                },
-                {
-                  "name": "cnt"
                 },
                 {
                   "name": "pc",
@@ -494,32 +448,12 @@
         },
         {
           "source": {
-            "block": "e738a6e1-5206-4b15-9181-1901077ce5fa",
-            "port": "out"
-          },
-          "target": {
-            "block": "15e4c588-45b9-4fe0-8016-d324b387c7ab",
-            "port": "clk"
-          }
-        },
-        {
-          "source": {
             "block": "3d211399-66ed-4227-96b3-cc0f4f4c8564",
             "port": "out"
           },
           "target": {
             "block": "15e4c588-45b9-4fe0-8016-d324b387c7ab",
             "port": "rst"
-          }
-        },
-        {
-          "source": {
-            "block": "886f328e-c08b-4ffb-ba0a-e29a466a8cb0",
-            "port": "out"
-          },
-          "target": {
-            "block": "15e4c588-45b9-4fe0-8016-d324b387c7ab",
-            "port": "cnt"
           }
         },
         {
