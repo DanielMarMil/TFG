@@ -1,0 +1,18 @@
+{
+  "name": "Procesador-MIPS-Coleccion",
+  "version": "0.1.0",
+  "description": "Coleccion de elementos para el desarrollo de un Procesador MIPS",
+  "keywords": "template",
+  "license": "GPL-3.0",
+  "authors": [{
+    "name": "Daniel Martín Millet",
+    "email": "danielmartinmillet@gmail.com",
+    "url": "https://github.com/DanielMarMil"
+  }],
+  "contributors": [],
+  "repository": {
+    "type": "git",
+    "branch": "master",
+    "url": "https://github.com/DanielMarMil/TFG"
+  }
+}
