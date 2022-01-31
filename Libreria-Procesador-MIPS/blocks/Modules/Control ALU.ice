@@ -1,10 +1,10 @@
 {
   "version": "1.2",
   "package": {
-    "name": "",
-    "version": "",
-    "description": "",
-    "author": "",
+    "name": "Control de la ALU",
+    "version": "1.0",
+    "description": "Control de la ALU",
+    "author": "Daniel Martín Millet (Maleurno)",
     "image": ""
   },
   "design": {

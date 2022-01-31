@@ -1,10 +1,10 @@
 {
   "version": "1.2",
   "package": {
-    "name": "",
-    "version": "",
-    "description": "",
-    "author": "",
+    "name": "PC",
+    "version": "1.0",
+    "description": "PC",
+    "author": "Daniel Martín Millet (Maleurno)",
     "image": ""
   },
   "design": {
@@ -12,12 +12,92 @@
     "graph": {
       "blocks": [
         {
-          "id": "f3b393c4-edaf-4c6c-ab8e-2f704cbddd34",
+          "id": "2c170c00-d470-4c49-8f21-ae002f8a8d54",
           "type": "basic.input",
           "data": {
             "name": "In",
-            "range": "[15:0]",
+            "range": "[31:0]",
             "pins": [
+              {
+                "index": "31",
+                "name": "",
+                "value": ""
+              },
+              {
+                "index": "30",
+                "name": "",
+                "value": ""
+              },
+              {
+                "index": "29",
+                "name": "",
+                "value": ""
+              },
+              {
+                "index": "28",
+                "name": "",
+                "value": ""
+              },
+              {
+                "index": "27",
+                "name": "",
+                "value": ""
+              },
+              {
+                "index": "26",
+                "name": "",
+                "value": ""
+              },
+              {
+                "index": "25",
+                "name": "",
+                "value": ""
+              },
+              {
+                "index": "24",
+                "name": "",
+                "value": ""
+              },
+              {
+                "index": "23",
+                "name": "",
+                "value": ""
+              },
+              {
+                "index": "22",
+                "name": "",
+                "value": ""
+              },
+              {
+                "index": "21",
+                "name": "",
+                "value": ""
+              },
+              {
+                "index": "20",
+                "name": "",
+                "value": ""
+              },
+              {
+                "index": "19",
+                "name": "",
+                "value": ""
+              },
+              {
+                "index": "18",
+                "name": "",
+                "value": ""
+              },
+              {
+                "index": "17",
+                "name": "",
+                "value": ""
+              },
+              {
+                "index": "16",
+                "name": "",
+                "value": ""
+              },
               {
                 "index": "15",
                 "name": "",
@@ -103,12 +183,12 @@
             "clock": false
           },
           "position": {
-            "x": 64,
-            "y": 416
+            "x": 40,
+            "y": 136
           }
         },
         {
-          "id": "fa209690-ac03-4a2d-899e-c2bcb49f75f4",
+          "id": "de21ccbe-0303-47be-90f9-86c3d22c72a1",
           "type": "basic.output",
           "data": {
             "name": "Out",
@@ -278,22 +358,45 @@
             "virtual": true
           },
           "position": {
-            "x": 752,
-            "y": 416
+            "x": 832,
+            "y": 216
           }
         },
         {
-          "id": "26780f02-53d0-4326-9e33-ff51b862335c",
+          "id": "8e942723-ddf8-483b-93dd-f34b49697961",
+          "type": "basic.input",
+          "data": {
+            "name": "clk",
+            "pins": [
+              {
+                "index": "0",
+                "name": "NULL",
+                "value": "NULL"
+              }
+            ],
+            "virtual": true,
+            "clock": false
+          },
+          "position": {
+            "x": 32,
+            "y": 296
+          }
+        },
+        {
+          "id": "571037c4-6977-4f27-a8fd-a972e8ea5735",
           "type": "basic.code",
           "data": {
-            "code": "assign out={in[15],in[15],in[15],in[15],in[15],in[15],in[15],in[15],in[15],in[15],in[15],in[15],in[15],in[15],in[15],in[15],in};",
+            "code": "reg [31:0]pc;\n\ninitial begin\n    pc <= 0;\nend\n\nalways @(posedge clk) begin\n    pc <= in;\nend\n\nassign out = pc;",
             "params": [],
             "ports": {
               "in": [
                 {
                   "name": "in",
-                  "range": "[15:0]",
-                  "size": 16
+                  "range": "[31:0]",
+                  "size": 32
+                },
+                {
+                  "name": "clk"
                 }
               ],
               "out": [
@@ -307,33 +410,43 @@
           },
           "position": {
             "x": 264,
-            "y": 336
+            "y": 88
           },
           "size": {
-            "width": 408,
-            "height": 216
+            "width": 504,
+            "height": 320
           }
         }
       ],
       "wires": [
         {
           "source": {
-            "block": "f3b393c4-edaf-4c6c-ab8e-2f704cbddd34",
+            "block": "8e942723-ddf8-483b-93dd-f34b49697961",
             "port": "out"
           },
           "target": {
-            "block": "26780f02-53d0-4326-9e33-ff51b862335c",
-            "port": "in"
-          },
-          "size": 16
+            "block": "571037c4-6977-4f27-a8fd-a972e8ea5735",
+            "port": "clk"
+          }
         },
         {
           "source": {
-            "block": "26780f02-53d0-4326-9e33-ff51b862335c",
+            "block": "2c170c00-d470-4c49-8f21-ae002f8a8d54",
             "port": "out"
           },
           "target": {
-            "block": "fa209690-ac03-4a2d-899e-c2bcb49f75f4",
+            "block": "571037c4-6977-4f27-a8fd-a972e8ea5735",
+            "port": "in"
+          },
+          "size": 32
+        },
+        {
+          "source": {
+            "block": "571037c4-6977-4f27-a8fd-a972e8ea5735",
+            "port": "out"
+          },
+          "target": {
+            "block": "de21ccbe-0303-47be-90f9-86c3d22c72a1",
             "port": "in"
           },
           "size": 32

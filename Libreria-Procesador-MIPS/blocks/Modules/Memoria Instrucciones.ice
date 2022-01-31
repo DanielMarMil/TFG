@@ -1,10 +1,10 @@
 {
   "version": "1.2",
   "package": {
-    "name": "",
-    "version": "",
-    "description": "",
-    "author": "",
+    "name": "Memoria de Instrucciones",
+    "version": "1.0",
+    "description": "Memoria de Instrucciones",
+    "author": "Daniel Martín Millet (Maleurno)",
     "image": ""
   },
   "design": {
@@ -12,12 +12,152 @@
     "graph": {
       "blocks": [
         {
-          "id": "bf14c783-ae46-4971-ace7-c6e14691c8b1",
+          "id": "5884febf-a05a-4c4f-b090-f9aec93abe79",
           "type": "basic.input",
           "data": {
-            "name": "In_0",
-            "range": "[3:0]",
+            "name": "Address",
+            "range": "[31:0]",
             "pins": [
+              {
+                "index": "31",
+                "name": "",
+                "value": ""
+              },
+              {
+                "index": "30",
+                "name": "",
+                "value": ""
+              },
+              {
+                "index": "29",
+                "name": "",
+                "value": ""
+              },
+              {
+                "index": "28",
+                "name": "",
+                "value": ""
+              },
+              {
+                "index": "27",
+                "name": "",
+                "value": ""
+              },
+              {
+                "index": "26",
+                "name": "",
+                "value": ""
+              },
+              {
+                "index": "25",
+                "name": "",
+                "value": ""
+              },
+              {
+                "index": "24",
+                "name": "",
+                "value": ""
+              },
+              {
+                "index": "23",
+                "name": "",
+                "value": ""
+              },
+              {
+                "index": "22",
+                "name": "",
+                "value": ""
+              },
+              {
+                "index": "21",
+                "name": "",
+                "value": ""
+              },
+              {
+                "index": "20",
+                "name": "",
+                "value": ""
+              },
+              {
+                "index": "19",
+                "name": "",
+                "value": ""
+              },
+              {
+                "index": "18",
+                "name": "",
+                "value": ""
+              },
+              {
+                "index": "17",
+                "name": "",
+                "value": ""
+              },
+              {
+                "index": "16",
+                "name": "",
+                "value": ""
+              },
+              {
+                "index": "15",
+                "name": "",
+                "value": ""
+              },
+              {
+                "index": "14",
+                "name": "",
+                "value": ""
+              },
+              {
+                "index": "13",
+                "name": "",
+                "value": ""
+              },
+              {
+                "index": "12",
+                "name": "",
+                "value": ""
+              },
+              {
+                "index": "11",
+                "name": "",
+                "value": ""
+              },
+              {
+                "index": "10",
+                "name": "",
+                "value": ""
+              },
+              {
+                "index": "9",
+                "name": "",
+                "value": ""
+              },
+              {
+                "index": "8",
+                "name": "",
+                "value": ""
+              },
+              {
+                "index": "7",
+                "name": "",
+                "value": ""
+              },
+              {
+                "index": "6",
+                "name": "",
+                "value": ""
+              },
+              {
+                "index": "5",
+                "name": "",
+                "value": ""
+              },
+              {
+                "index": "4",
+                "name": "",
+                "value": ""
+              },
               {
                 "index": "3",
                 "name": "",
@@ -43,15 +183,15 @@
             "clock": false
           },
           "position": {
-            "x": 48,
-            "y": 128
+            "x": -72,
+            "y": 432
           }
         },
         {
-          "id": "e3aa931a-67f0-4b2c-960a-da906a7513c7",
+          "id": "ce0edf0c-6308-4ead-aae8-1123564b9d86",
           "type": "basic.output",
           "data": {
-            "name": "Out",
+            "name": "Instruction",
             "range": "[31:0]",
             "pins": [
               {
@@ -218,178 +358,27 @@
             "virtual": true
           },
           "position": {
-            "x": 784,
-            "y": 168
+            "x": 896,
+            "y": 432
           }
         },
         {
-          "id": "b8e82cad-0b16-4738-af91-7a2eb0ec0a59",
-          "type": "basic.input",
-          "data": {
-            "name": "In_1",
-            "range": "[25:0]",
-            "pins": [
-              {
-                "index": "25",
-                "name": "",
-                "value": ""
-              },
-              {
-                "index": "24",
-                "name": "",
-                "value": ""
-              },
-              {
-                "index": "23",
-                "name": "",
-                "value": ""
-              },
-              {
-                "index": "22",
-                "name": "",
-                "value": ""
-              },
-              {
-                "index": "21",
-                "name": "",
-                "value": ""
-              },
-              {
-                "index": "20",
-                "name": "",
-                "value": ""
-              },
-              {
-                "index": "19",
-                "name": "",
-                "value": ""
-              },
-              {
-                "index": "18",
-                "name": "",
-                "value": ""
-              },
-              {
-                "index": "17",
-                "name": "",
-                "value": ""
-              },
-              {
-                "index": "16",
-                "name": "",
-                "value": ""
-              },
-              {
-                "index": "15",
-                "name": "",
-                "value": ""
-              },
-              {
-                "index": "14",
-                "name": "",
-                "value": ""
-              },
-              {
-                "index": "13",
-                "name": "",
-                "value": ""
-              },
-              {
-                "index": "12",
-                "name": "",
-                "value": ""
-              },
-              {
-                "index": "11",
-                "name": "",
-                "value": ""
-              },
-              {
-                "index": "10",
-                "name": "",
-                "value": ""
-              },
-              {
-                "index": "9",
-                "name": "",
-                "value": ""
-              },
-              {
-                "index": "8",
-                "name": "",
-                "value": ""
-              },
-              {
-                "index": "7",
-                "name": "",
-                "value": ""
-              },
-              {
-                "index": "6",
-                "name": "",
-                "value": ""
-              },
-              {
-                "index": "5",
-                "name": "",
-                "value": ""
-              },
-              {
-                "index": "4",
-                "name": "",
-                "value": ""
-              },
-              {
-                "index": "3",
-                "name": "",
-                "value": ""
-              },
-              {
-                "index": "2",
-                "name": "",
-                "value": ""
-              },
-              {
-                "index": "1",
-                "name": "",
-                "value": ""
-              },
-              {
-                "index": "0",
-                "name": "",
-                "value": ""
-              }
-            ],
-            "virtual": true,
-            "clock": false
-          },
-          "position": {
-            "x": 48,
-            "y": 200
-          }
-        },
-        {
-          "id": "6235c59e-d0ee-4238-bc10-e80f0fc1b87f",
+          "id": "f4c334b5-ce5c-4afa-8dbf-56ee8c4167c6",
           "type": "basic.code",
           "data": {
-            "code": "reg [1:0]cero;\ninitial begin\n    cero <= 0;\nend\nassign out = {in_0[3:0], in_1[25:0], cero};",
+            "code": "// Instruction Bus (32 bits)\nreg [31:0] I;\n// Memory Instruction\nreg [31:0] ins [0:63];\n\nparameter INSTROMFILE = \"Instrucciones.list\";\n\nalways @(*) begin\n   I <= ins[A[31:2]];\nend\n\n// Memory contents read\n// from the INSTROMFILE table\ninitial begin\n    if (INSTROMFILE) $readmemh(INSTROMFILE, ins);\nend",
             "params": [],
             "ports": {
               "in": [
                 {
-                  "name": "in_0",
-                  "range": "[3:0]",
-                  "size": 4
-                },
-                {
-                  "name": "in_1",
-                  "range": "[25:0]",
-                  "size": 26
+                  "name": "A",
+                  "range": "[31:0]",
+                  "size": 32
                 }
               ],
               "out": [
                 {
-                  "name": "out",
+                  "name": "I",
                   "range": "[31:0]",
                   "size": 32
                 }
@@ -397,45 +386,34 @@
             }
           },
           "position": {
-            "x": 264,
-            "y": 128
+            "x": 224,
+            "y": 280
           },
           "size": {
-            "width": 432,
-            "height": 136
+            "width": 544,
+            "height": 360
           }
         }
       ],
       "wires": [
         {
           "source": {
-            "block": "bf14c783-ae46-4971-ace7-c6e14691c8b1",
+            "block": "5884febf-a05a-4c4f-b090-f9aec93abe79",
             "port": "out"
           },
           "target": {
-            "block": "6235c59e-d0ee-4238-bc10-e80f0fc1b87f",
-            "port": "in_0"
+            "block": "f4c334b5-ce5c-4afa-8dbf-56ee8c4167c6",
+            "port": "A"
           },
-          "size": 4
+          "size": 32
         },
         {
           "source": {
-            "block": "b8e82cad-0b16-4738-af91-7a2eb0ec0a59",
-            "port": "out"
+            "block": "f4c334b5-ce5c-4afa-8dbf-56ee8c4167c6",
+            "port": "I"
           },
           "target": {
-            "block": "6235c59e-d0ee-4238-bc10-e80f0fc1b87f",
-            "port": "in_1"
-          },
-          "size": 26
-        },
-        {
-          "source": {
-            "block": "6235c59e-d0ee-4238-bc10-e80f0fc1b87f",
-            "port": "out"
-          },
-          "target": {
-            "block": "e3aa931a-67f0-4b2c-960a-da906a7513c7",
+            "block": "ce0edf0c-6308-4ead-aae8-1123564b9d86",
             "port": "in"
           },
           "size": 32

@@ -1,10 +1,10 @@
 {
   "version": "1.2",
   "package": {
-    "name": "",
-    "version": "",
-    "description": "",
-    "author": "",
+    "name": "Or de 3 a 1",
+    "version": "1.0",
+    "description": "Or de 3 entradas y 1 salida",
+    "author": "Daniel Martín Millet (Maleurno)",
     "image": ""
   },
   "design": {
@@ -12,10 +12,10 @@
     "graph": {
       "blocks": [
         {
-          "id": "fe6275b6-cdc6-4f83-844b-41ef8435dc17",
+          "id": "3f912c0d-b83c-4d7e-9bd6-9f2052931837",
           "type": "basic.input",
           "data": {
-            "name": "In_1",
+            "name": "",
             "pins": [
               {
                 "index": "0",
@@ -28,64 +28,33 @@
           },
           "position": {
             "x": 88,
-            "y": 320
+            "y": 328
           }
         },
         {
-          "id": "04c2e460-4e75-4c85-98d4-9cd4b65c6faa",
-          "type": "basic.input",
-          "data": {
-            "name": "In_2",
-            "pins": [
-              {
-                "index": "0",
-                "name": "NULL",
-                "value": "NULL"
-              }
-            ],
-            "virtual": true,
-            "clock": false
-          },
-          "position": {
-            "x": 88,
-            "y": 448
-          }
-        },
-        {
-          "id": "c3d6424f-d731-4de5-b49b-aec8557ad333",
+          "id": "c694e662-4967-49a3-9d69-1017647a42ac",
           "type": "basic.output",
           "data": {
-            "name": "Out",
-            "range": "[2:0]",
+            "name": "",
             "pins": [
               {
-                "index": "2",
-                "name": "",
-                "value": ""
-              },
-              {
-                "index": "1",
-                "name": "",
-                "value": ""
-              },
-              {
                 "index": "0",
-                "name": "",
-                "value": ""
+                "name": "NULL",
+                "value": "NULL"
               }
             ],
             "virtual": true
           },
           "position": {
-            "x": 800,
+            "x": 776,
             "y": 448
           }
         },
         {
-          "id": "524da187-1f45-4d7f-b106-ef00baa2716a",
+          "id": "77a9fa2c-c5eb-473d-aff3-ef4142dc806f",
           "type": "basic.input",
           "data": {
-            "name": "In_3",
+            "name": "",
             "pins": [
               {
                 "index": "0",
@@ -97,88 +66,105 @@
             "clock": false
           },
           "position": {
-            "x": 80,
+            "x": 96,
+            "y": 448
+          }
+        },
+        {
+          "id": "4deba4b4-da58-4fea-9bc0-e28895372298",
+          "type": "basic.input",
+          "data": {
+            "name": "",
+            "pins": [
+              {
+                "index": "0",
+                "name": "NULL",
+                "value": "NULL"
+              }
+            ],
+            "virtual": true,
+            "clock": false
+          },
+          "position": {
+            "x": 88,
             "y": 568
           }
         },
         {
-          "id": "b45ffa47-943a-411b-a598-1229e436bf75",
+          "id": "0b10c324-577a-44d3-9ca1-cb2969e584ac",
           "type": "basic.code",
           "data": {
-            "code": "reg [2:0]salida;\n\ninitial begin\n    salida <= 0;\nend\nalways @(*) begin\n    salida[0] <= in_1;\n    salida[1] <= in_2;\n    salida[2] <= in_3;\nend\n\nassign out = salida;",
+            "code": "assign d = a | b | c;",
             "params": [],
             "ports": {
               "in": [
                 {
-                  "name": "in_1"
+                  "name": "a"
                 },
                 {
-                  "name": "in_2"
+                  "name": "b"
                 },
                 {
-                  "name": "in_3"
+                  "name": "c"
                 }
               ],
               "out": [
                 {
-                  "name": "out",
-                  "range": "[2:0]",
-                  "size": 3
+                  "name": "d"
                 }
               ]
             }
           },
           "position": {
-            "x": 296,
-            "y": 288
+            "x": 272,
+            "y": 304
           },
           "size": {
-            "width": 424,
-            "height": 376
+            "width": 448,
+            "height": 352
           }
         }
       ],
       "wires": [
         {
           "source": {
-            "block": "fe6275b6-cdc6-4f83-844b-41ef8435dc17",
-            "port": "out"
+            "block": "0b10c324-577a-44d3-9ca1-cb2969e584ac",
+            "port": "d"
           },
           "target": {
-            "block": "b45ffa47-943a-411b-a598-1229e436bf75",
-            "port": "in_1"
-          }
-        },
-        {
-          "source": {
-            "block": "04c2e460-4e75-4c85-98d4-9cd4b65c6faa",
-            "port": "out"
-          },
-          "target": {
-            "block": "b45ffa47-943a-411b-a598-1229e436bf75",
-            "port": "in_2"
-          }
-        },
-        {
-          "source": {
-            "block": "524da187-1f45-4d7f-b106-ef00baa2716a",
-            "port": "out"
-          },
-          "target": {
-            "block": "b45ffa47-943a-411b-a598-1229e436bf75",
-            "port": "in_3"
-          }
-        },
-        {
-          "source": {
-            "block": "b45ffa47-943a-411b-a598-1229e436bf75",
-            "port": "out"
-          },
-          "target": {
-            "block": "c3d6424f-d731-4de5-b49b-aec8557ad333",
+            "block": "c694e662-4967-49a3-9d69-1017647a42ac",
             "port": "in"
+          }
+        },
+        {
+          "source": {
+            "block": "3f912c0d-b83c-4d7e-9bd6-9f2052931837",
+            "port": "out"
           },
-          "size": 3
+          "target": {
+            "block": "0b10c324-577a-44d3-9ca1-cb2969e584ac",
+            "port": "a"
+          }
+        },
+        {
+          "source": {
+            "block": "77a9fa2c-c5eb-473d-aff3-ef4142dc806f",
+            "port": "out"
+          },
+          "target": {
+            "block": "0b10c324-577a-44d3-9ca1-cb2969e584ac",
+            "port": "b"
+          }
+        },
+        {
+          "source": {
+            "block": "4deba4b4-da58-4fea-9bc0-e28895372298",
+            "port": "out"
+          },
+          "target": {
+            "block": "0b10c324-577a-44d3-9ca1-cb2969e584ac",
+            "port": "c"
+          }
         }
       ]
     }

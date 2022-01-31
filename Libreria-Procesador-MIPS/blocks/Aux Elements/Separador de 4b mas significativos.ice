@@ -1,10 +1,10 @@
 {
   "version": "1.2",
   "package": {
-    "name": "",
-    "version": "",
-    "description": "",
-    "author": "",
+    "name": "4bit más significativos",
+    "version": "1.0",
+    "description": "Coge los 4 bits más significativo de una entrada de 32 bits",
+    "author": "Daniel Martín Millet (Maleurno)",
     "image": ""
   },
   "design": {

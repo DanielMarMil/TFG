@@ -1,10 +1,10 @@
 {
   "version": "1.2",
   "package": {
-    "name": "",
-    "version": "",
-    "description": "",
-    "author": "",
+    "name": "Extensión de Signo",
+    "version": "1.0",
+    "description": "Extensión de signo, entrada de 16bits a una salida de 32 bits",
+    "author": "Daniel Martín Millet (Maleurno)",
     "image": ""
   },
   "design": {
@@ -12,92 +12,12 @@
     "graph": {
       "blocks": [
         {
-          "id": "2c170c00-d470-4c49-8f21-ae002f8a8d54",
+          "id": "f3b393c4-edaf-4c6c-ab8e-2f704cbddd34",
           "type": "basic.input",
           "data": {
             "name": "In",
-            "range": "[31:0]",
+            "range": "[15:0]",
             "pins": [
-              {
-                "index": "31",
-                "name": "",
-                "value": ""
-              },
-              {
-                "index": "30",
-                "name": "",
-                "value": ""
-              },
-              {
-                "index": "29",
-                "name": "",
-                "value": ""
-              },
-              {
-                "index": "28",
-                "name": "",
-                "value": ""
-              },
-              {
-                "index": "27",
-                "name": "",
-                "value": ""
-              },
-              {
-                "index": "26",
-                "name": "",
-                "value": ""
-              },
-              {
-                "index": "25",
-                "name": "",
-                "value": ""
-              },
-              {
-                "index": "24",
-                "name": "",
-                "value": ""
-              },
-              {
-                "index": "23",
-                "name": "",
-                "value": ""
-              },
-              {
-                "index": "22",
-                "name": "",
-                "value": ""
-              },
-              {
-                "index": "21",
-                "name": "",
-                "value": ""
-              },
-              {
-                "index": "20",
-                "name": "",
-                "value": ""
-              },
-              {
-                "index": "19",
-                "name": "",
-                "value": ""
-              },
-              {
-                "index": "18",
-                "name": "",
-                "value": ""
-              },
-              {
-                "index": "17",
-                "name": "",
-                "value": ""
-              },
-              {
-                "index": "16",
-                "name": "",
-                "value": ""
-              },
               {
                 "index": "15",
                 "name": "",
@@ -183,12 +103,12 @@
             "clock": false
           },
           "position": {
-            "x": 40,
-            "y": 136
+            "x": 64,
+            "y": 416
           }
         },
         {
-          "id": "de21ccbe-0303-47be-90f9-86c3d22c72a1",
+          "id": "fa209690-ac03-4a2d-899e-c2bcb49f75f4",
           "type": "basic.output",
           "data": {
             "name": "Out",
@@ -358,45 +278,22 @@
             "virtual": true
           },
           "position": {
-            "x": 832,
-            "y": 216
+            "x": 752,
+            "y": 416
           }
         },
         {
-          "id": "8e942723-ddf8-483b-93dd-f34b49697961",
-          "type": "basic.input",
-          "data": {
-            "name": "clk",
-            "pins": [
-              {
-                "index": "0",
-                "name": "NULL",
-                "value": "NULL"
-              }
-            ],
-            "virtual": true,
-            "clock": false
-          },
-          "position": {
-            "x": 32,
-            "y": 296
-          }
-        },
-        {
-          "id": "571037c4-6977-4f27-a8fd-a972e8ea5735",
+          "id": "26780f02-53d0-4326-9e33-ff51b862335c",
           "type": "basic.code",
           "data": {
-            "code": "reg [31:0]pc;\n\ninitial begin\n    pc <= 0;\nend\n\nalways @(posedge clk) begin\n    pc <= in;\nend\n\nassign out = pc;",
+            "code": "assign out={in[15],in[15],in[15],in[15],in[15],in[15],in[15],in[15],in[15],in[15],in[15],in[15],in[15],in[15],in[15],in[15],in};",
             "params": [],
             "ports": {
               "in": [
                 {
                   "name": "in",
-                  "range": "[31:0]",
-                  "size": 32
-                },
-                {
-                  "name": "clk"
+                  "range": "[15:0]",
+                  "size": 16
                 }
               ],
               "out": [
@@ -410,43 +307,33 @@
           },
           "position": {
             "x": 264,
-            "y": 88
+            "y": 336
           },
           "size": {
-            "width": 504,
-            "height": 320
+            "width": 408,
+            "height": 216
           }
         }
       ],
       "wires": [
         {
           "source": {
-            "block": "8e942723-ddf8-483b-93dd-f34b49697961",
+            "block": "f3b393c4-edaf-4c6c-ab8e-2f704cbddd34",
             "port": "out"
           },
           "target": {
-            "block": "571037c4-6977-4f27-a8fd-a972e8ea5735",
-            "port": "clk"
-          }
-        },
-        {
-          "source": {
-            "block": "2c170c00-d470-4c49-8f21-ae002f8a8d54",
-            "port": "out"
-          },
-          "target": {
-            "block": "571037c4-6977-4f27-a8fd-a972e8ea5735",
+            "block": "26780f02-53d0-4326-9e33-ff51b862335c",
             "port": "in"
           },
-          "size": 32
+          "size": 16
         },
         {
           "source": {
-            "block": "571037c4-6977-4f27-a8fd-a972e8ea5735",
+            "block": "26780f02-53d0-4326-9e33-ff51b862335c",
             "port": "out"
           },
           "target": {
-            "block": "de21ccbe-0303-47be-90f9-86c3d22c72a1",
+            "block": "fa209690-ac03-4a2d-899e-c2bcb49f75f4",
             "port": "in"
           },
           "size": 32

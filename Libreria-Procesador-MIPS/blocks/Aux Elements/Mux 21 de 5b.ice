@@ -1,10 +1,10 @@
 {
   "version": "1.2",
   "package": {
-    "name": "",
-    "version": "",
-    "description": "",
-    "author": "",
+    "name": "Mux de 2 a 1 de 5 bits",
+    "version": "1.0",
+    "description": "Multiplexor de 2 entradas a 1 salida de 5 bits",
+    "author": "Daniel Martín Millet (Maleurno)",
     "image": ""
   },
   "design": {
